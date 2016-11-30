@@ -6,16 +6,17 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "~2.1.2",
     "body-parser": "~1.15.2",
+    "config": "latest",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
-    "hbs": "~4.0.1",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
     "express-handlebars": "~3.0.0",
-    "config": "latest",
+    "hbs": "~4.0.1",
+    "jsonwebtoken": "^7.1.9",
     "mongoose": "latest",
-    "async": "~2.1.2"
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
   }
 }
