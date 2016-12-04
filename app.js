@@ -26,12 +26,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Middleware
-var index = require('./routes/index');
-var users = require('./routes/users');
+
 var log = require('./routes/loginMidleware')(['/ask']);//Указываем пути которые игнорить
 app.use('/',log);
+
+//routing
+var index = require('./routes/index');
 app.use('/', index);
-app.use('/users', users);
+var interview=require('./routes/interview');
+app.use('/interview',interview);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

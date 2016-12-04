@@ -18,11 +18,12 @@ function initTokenCheck(array) {
                 }
             });
         }
-        if (!ignore) {
-            //Получаем из заголовка токен
-            req.get("token");
-            resp.send('r');
-        }
+        next();
+        // if (!ignore) {
+        //     //Получаем из заголовка токен
+        //     req.get("token");
+        //     resp.send('r');
+        // }
     });
     return router;
 }
