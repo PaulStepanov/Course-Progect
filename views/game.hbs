@@ -1,11 +1,11 @@
-<html>
+
+<html lang="en">
 <head>
-    <title>Brain Ring</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/flipclock.css">
 <div class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -143,20 +143,56 @@
         </div>
     </div>
 </div>
+<div class="parallax">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/flipclock.css">
+    <link rel="stylesheet" type="text/css" href="/css/gamestyle.css">
+    <div class="container">
+        <div class="row">
 
+            <div class="col-md-12 text-center text-capitalize bg-info"><h1>Вопрос</h1></div>
+            <div class="col-md-12 text-center text-capitalize bg-primary"><h2 id="question">Lorem ipsum dolor sit
+                amet, consectetur adipisicing elit. Animi at exercitationem facilis impedit incidunt, iure maxime
+                nobis omnis totam unde veritatis voluptatibus! Dicta dolorum ex, itaque labore nemo quos sint!</h2>
+            </div>
 
+            <div class="col-md-12">
+                <div class="well well-md">
+                    <div class="">
+                        <div class="media-body">
+                            <div class="form-group" style="padding:12px;">
+                                <textarea class="form-control animated" placeholder="Введи ваш ответ"></textarea>
+                                <button class="btn btn-info pull-right" style="margin-top:10px" type="button">Отправить
+                                    ответ
+                                </button>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>  <!-- well-sm -->
 
+                <script>
+
+                </script>
+            </div>
+        </div>
+        <div class="col-lg-12 text-center text-capitalize bg-danger">
+            <h3>До оконачния возможности ответа</h3>
+        </div>
+        <div class="col-lg-12 text-center text-capitalize bg-danger">
+            <div id="myclock" class="center-block"></div>
+        </div>
+        <div class="col-md-offset-4"></div>
+    </div>
+</div>
 
 <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
 <script src="/js/bootstrap.js"></script>
-<script src="/js/jquery.countdown.min.js"></script>
-
+<script src="/js/flipclock.js"></script>
+<script src="/js/gamejs.js"></script>
 <script src="/js/js.js"></script>
-
-
 </body>
 </html>

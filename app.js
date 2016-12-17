@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var hbs = require('express-handlebars');
 
 
-var ask = require('./routes/ask');
+
 
 
 var app = express();
@@ -25,17 +25,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Session
+var session = require('express-session');
+app.use('/',session({
+  resave: true,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 },
+  secret: ' '
+}));
 //Middleware
 
-var log = require('./routes/loginMidleware')(['/ask']);//Указываем пути которые игнорить
-app.use('/',log);
-
+// var log = require('./routes/loginMidleware')([]);//Указываем пути которые игнорить
+// app.use('/',log);
+app.use(express.static('public'));
 //routing
 var index = require('./routes/index');
 app.use('/', index);
 var interview=require('./routes/interview');
 app.use('/interview',interview);
+var ask=require('./routes/ask');
+app.use('/ask',ask);
+var stat=require('./routes/stat');
+app.use('/stat',stat);
+var game=require('./routes/game');
+app.use('/game',game);
 
+//rest
+var login=require('./routes/rest/login/login');
+app.use('/rest',login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

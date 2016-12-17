@@ -71,7 +71,7 @@ let Game = class Game {
         this._timer.setStartTime(question.time);
         var self = this._timer;
         //Функция по окончанию таймера
-        this._timer.finish(self=> {
+        this._timer.finish((self) => {
             question = this._currentQuestionIterator.next();
             if (question.done != true) {
                 this._timer = new Timer("00:00");
@@ -84,5 +84,5 @@ let Game = class Game {
         });
         this._timer.start();
     }
-};
+}
 module.exports = Game;
