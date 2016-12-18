@@ -4,28 +4,32 @@
 //imports
 const Player = require('../models/Player');
 const Timer = require('timrjs');
-
+var Question=require('../models/Question');
 
 let Game = class Game {
     constructor(questions) {
         //fields
         this.currentQuestion = null;
+        this.currentQuestionNumber = 0;
         this.players = [];
         this.questions = questions;
         this.usersAnswers = [];
         //private
         this._state = false;
-        this._timer = new Timer('00:00');
+        this.timer = new Timer('00:00');
         this._currentQuestionIterator = (function makeIterator(array) {
             var nextIndex = 0;
             return {
                 next: function () {
                     return nextIndex < array.length ?
-                    {value: array[nextIndex++], done: false} :
+                    {value: array[nextIndex++], done: false,index:nextIndex++} :
                     {done: true};
                 }
             }
         })(questions);
+
+        //Костыль
+        questions.push(new Question('Questions is ended','','13:37'))
     }
 
     //getters and setters
@@ -34,7 +38,7 @@ let Game = class Game {
     }
 
     get timerTime() {
-        return this._timer.getCurrentTime();
+        return this.timer.getCurrentTime();
     }
 
     //methods
@@ -52,10 +56,11 @@ let Game = class Game {
         if (this.players.includes(player)) {
             var answ = {
                 team: player,
+                question_number:this.currentQuestionNumber,
                 answer: answer,//user answer number 2
                 right: false//TODO сравнить с правильным
             };
-            if (!this.usersAnswers.includes(answ)) {
+            if (true) {
                 this.usersAnswers.push(answ)
             } else {
                 console.log('there were such answer');
@@ -68,21 +73,28 @@ let Game = class Game {
     /*Активирует вопрос,выставляя таймер,выставлять текущий вопрос*/
     _procceedQuestion(question) {
         this.currentQuestion = question;
-        this._timer.setStartTime(question.time);
-        var self = this._timer;
+        this.currentQuestionNumber++;
+        this.timer.setStartTime(question.time);
+        var self = this.timer;
         //Функция по окончанию таймера
-        this._timer.finish((self) => {
+        this.timer.finish((self) => {
             question = this._currentQuestionIterator.next();
             if (question.done != true) {
-                this._timer = new Timer("00:00");
+                this.timer = new Timer("00:00");
                 question = question.value;
-                this._procceedQuestion(question);
+                if (question) {
+                    this._procceedQuestion(question);
+                } else {
+                    console.log("game ended");
+
+                }
             } else {
                 console.log("game ended");
+
             }
             //TODO Добавить функционал если человек ничего не ответил
         });
-        this._timer.start();
+        this.timer.start();
     }
 }
 module.exports = Game;

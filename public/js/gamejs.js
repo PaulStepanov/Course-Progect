@@ -251,25 +251,46 @@
         });
     };
 }(window.jQuery || window.$)); // jQuery or jQuery-like library, such as Zepto
-var clock = new FlipClock($('#myclock'), 100, {
-    countdown:true,
-    // Create a minute counter
-    clockFace: 'MinuteCounter',
 
-    // The onStart callback
-    onStart: function() {
-        // Do something
-    },
+function timeparse(hms) {
+    var a = hms.split(':');
+    console.log(+a[1]);
+    var seconds = (+a[0])  * 60 + (+a[1])  ;
+    return seconds;
+}
+question=$.get('/game/getQuestion',function (resp) {
+    $('#questText').html(`<h2>${resp.text}</h2>`);
+    setTimeout(function () {
+        clock.stop();
+        location.reload();
+    }.bind(this),resp.time*1000+1000)
+    var clock = new FlipClock($('#myclock'), resp.time, {
+        countdown:true,
 
-    // The onStop callback
-    onStop: function() {
-        // Do something
-    },
+        // Create a minute counter
+        clockFace: 'MinuteCounter',
 
-    // The onReset callback
-    onReset: function() {
-        // Do something
-    }
+
+        // The onStart callback
+        onStart: function() {
+
+        },
+
+        // The onStop callback
+        onStop: function() {
+            location.reload();
+        },
+
+        // The onInterval callback
+        onInterval: function() {
+
+        }
+    });
+    clock.start();
 });
-console.log('hi');
-clock.start();
+$('#answbut').click(function () {
+    $.get('/game/answer',$('#answerform').serialize(),function () {
+
+    })
+});
+$('#questText').html(`<h2>${question.text}</h2>`)

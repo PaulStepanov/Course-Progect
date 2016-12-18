@@ -20,6 +20,12 @@ $("#SingInButton").click(function () {
     }
 });
 
+$("#LogOutButton").click(function () {
+    $.get("/rest/logout",function () {
+        location.reload();
+    })
+});
+
 $(function() {
 
     var $formLogin = $('#login-form');

@@ -27,3 +27,7 @@ body, html {
     -moz-transition: height 0.2s;
     transition: height 0.2s;
 }
+
+#myclock {
+    margin-top: 35px;
+}
